@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import Routes from './Routes';
+import Routes from './Routes/RegLog';
 import helmet from "helmet";
+import Profile from './Routes/Profile';
 
 const app = express();
 app.use(helmet());
@@ -27,6 +28,7 @@ app.use(cors({
 app.options('*', cors());
 
 app.use('/', Routes());
+app.use('/profile', Profile());
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
