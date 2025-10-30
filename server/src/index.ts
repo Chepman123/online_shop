@@ -3,6 +3,8 @@ import cors from 'cors';
 import Routes from './Routes/RegLog';
 import helmet from "helmet";
 import Profile from './Routes/Profile';
+import AddItem from './Routes/Item';
+import Main from './Routes/Main';
 
 const app = express();
 app.use(helmet());
@@ -29,6 +31,8 @@ app.options('*', cors());
 
 app.use('/', Routes());
 app.use('/profile', Profile());
+app.use('/', Main());
+app.use('/', AddItem());
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

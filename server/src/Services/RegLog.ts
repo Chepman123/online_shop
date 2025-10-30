@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 import db from '../db';
 import bcrypt from 'bcrypt'
 export interface User{
@@ -6,7 +6,8 @@ export interface User{
     username:string,
     password:string,
     _id?:string,
-    description?:string
+    description?:string,
+    cart?:ObjectId[]
 }
 export default class RegLogService{
 
@@ -18,9 +19,6 @@ export default class RegLogService{
         if(await this.LoginIsUsed(login,users)) return
 
         await users.insertOne({login:login,password:hashedPassword,username:username});
-        const carts = client.collection('carts');
-        const userId:string|undefined = (await users.findOne({login:login},{projection:{_id:1}}))?._id;
-        carts.insertOne({userId:userId});
     }
     async Login(login:string,password:string){
        const client = (await db).db('test');

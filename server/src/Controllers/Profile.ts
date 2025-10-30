@@ -10,4 +10,9 @@ export default class{
     async Edit(req:Request,res:Response){
         this.service.EditProfile(req.params.username,req.body.description);
     }
+    async GetLiked(req:Request,res:Response){
+        const result = await this.service.GetLiked(req.params.username);
+        console.log(result);
+        res.json(result);
+    }
 }
