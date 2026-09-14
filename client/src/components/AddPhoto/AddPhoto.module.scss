@@ -1,0 +1,46 @@
+.article {
+    position: relative;
+    width: fit-content;
+}
+
+.img {
+    display: block;
+    max-width: 150px;
+    transition: 0.2s ease-in-out all;
+}
+
+.button {
+    display: none;
+    position: absolute;
+
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: none;
+    border: none;
+    font-size: 50px;
+    color: white;
+}
+
+.article:hover .button {
+    display: block;
+}
+
+.article:hover .img {
+    opacity: 0.1;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button:active {
+    background: none;
+    transform: translate(-50%, -50%);
+    box-shadow: none;
+}
+
+.img:hover {
+    cursor: pointer;
+}

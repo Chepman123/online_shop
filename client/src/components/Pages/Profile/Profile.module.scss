@@ -1,0 +1,50 @@
+.main{
+    padding-top: 75px;
+    background-color: rgb(55, 53, 57);
+    color: white;
+      button{
+    margin-top: 50px;
+    background-color: rgb(109, 131, 102);
+    padding: 15px 100px 15px 100px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    transition: all ease-in-out 0.2s;
+    margin-bottom: 20px;
+   }
+   button:hover{
+    cursor: pointer;
+    transform: translateY(-2.5px);
+      box-shadow: 0px 5px 15px -1px #000000;
+   }
+   button:active{
+    background-color: rgb(93, 105, 89);
+    transform: translateY(0);
+    box-shadow: none;
+   }
+  
+  textarea{
+    background-color: rgb(55, 53, 57);
+    border: 1px solid rgb(137, 133, 140);
+    color: rgb(137, 133, 140);
+    width: 500px;
+    height: 200px;
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+.divLiked{
+  display: flex;
+  gap: 20px;
+  padding-bottom: 50px;
+}
+.title{
+  margin-top: 20px;
+  margin-left: 100px;
+}
+.main > div{
+    padding-top: 50px;
+     width: 90%;
+   justify-self: center;
+   border-bottom: 1px solid rgb(137, 133, 140);
+  }

@@ -1,11 +1,19 @@
 import db from "../db"
 import { Collection, ObjectId } from 'mongodb';
 import { User } from "./RegLog";
+import jwt from 'jsonwebtoken'
+import Item from "../Controllers/Item";
+import IsInCart from "../utils/ItemsFunction";
 export interface item{
    title:string,
    description:string,
    price:number,
-   review?:review[]
+   review?:review[],
+   photos:string[],
+   creator:ObjectId|string,
+   _id?:ObjectId,
+   categories:{_id:ObjectId}[],
+   isInCart?:boolean
 }
 export interface review{
      content:string,
@@ -14,10 +22,32 @@ export interface review{
 }
 
 export default class{
-    async AddItem(item:item){
+    async AddItem(item:item,photos:[string],token:string,categories:string[]):Promise<string|undefined>{
+
+    const decoded:ObjectId = new ObjectId((await jwt.verify(token,process.env.SECRET!) as {_id:string})._id);
+     item.creator = decoded;
+     item.photos = photos;
      const client = (await db).db('test');
+
+     const categorie = client.collection('categories');
+
+     const resultCat: { _id: ObjectId }[] = await categorie.find(
+    {
+        title: {
+            $in:categories 
+        }
+    },
+    {
+        projection: {
+            title: 0
+        }
+    }
+).toArray();
+     item.categories = resultCat;
      const items = await client.collection('items');
-     items.insertOne(item);
+     
+     const result = await items.insertOne(item);
+     return result.insertedId.toString();
     }
     async GetData(id:string|ObjectId):Promise<item|null>{
         const client = (await db).db('test');
@@ -35,14 +65,19 @@ export default class{
 
         return item;
     }
-    async AddCart(id:string){
+    async AddCart(id:string,token:string){
+
+         const decoded:ObjectId = new ObjectId((await jwt.verify(token,process.env.SECRET!) as {_id:string})._id);
+
         const client = (await db).db('test');
         const users:Collection<User> = await client.collection('users'); 
-        users.updateOne({username:"LaraBraus"},{$push:{cart:new ObjectId(id)}});
+        if(!await IsInCart(token,new ObjectId(id)))users.updateOne({_id:decoded},{$push:{cart:new ObjectId(id)}});
+        else users.updateOne({_id:decoded},{$pull:{cart:new ObjectId(id)}});
     }
-    async Like(id:string,username:string){
+    async Like(id:string,token:string){
         const client = (await db).db('test');
-        const userId =(await client.collection('users').findOne({username:username}))?._id;
+         const decoded:ObjectId = new ObjectId((await jwt.verify(token,process.env.SECRET!) as {_id:string})._id);
+        const userId =(await client.collection('users').findOne({_id:decoded}))?._id;
         const items:Collection<item> = client.collection('items');
         items.updateOne({_id:new ObjectId(id)},{$push:{likes:userId}})
     }

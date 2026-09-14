@@ -1,0 +1,47 @@
+.div{
+    padding-top: 20px;
+    width: 300px;
+    background-color: rgba(29, 29, 29);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+      box-shadow: 0px 5px 15px 5px #000000;
+  a{
+    text-decoration: none;
+  }
+    img{
+        max-width: 100%;
+    }
+    h1,h2{
+        justify-self: center;
+          color: white;
+    }
+    h1{
+        border-bottom: 1px solid white;
+        margin-bottom: 10px;
+    }
+    h2{
+        opacity: 0.5;
+    }
+    button{
+        background-color: white;
+        color: black;
+        border-radius: 5px;
+        font-weight: bolder;
+            transition: all ease-in-out 0.2s;
+            margin-top: 50px;
+            margin-bottom: 20px;
+    padding: 15px 100px 15px 100px;
+    }
+    button:hover{
+    cursor: pointer;
+    transform: translateY(-2.5px);
+      box-shadow: 0px 5px 15px -1px #000000;
+   }
+   button:active{
+    background-color: rgb(224, 224, 224);
+    transform: translateY(0);
+    box-shadow: none;
+   }
+}

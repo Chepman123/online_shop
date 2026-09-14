@@ -5,11 +5,12 @@ import helmet from "helmet";
 import Profile from './Routes/Profile';
 import AddItem from './Routes/Item';
 import Main from './Routes/Main';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(helmet());
-app.use(express.json());
-
+app.use(express.json({ limit: '10mb' }));
+app.use(cookieParser());
 const allowedOrigins = ['https://dantway.pl', 'http://localhost:5173'];
 
 app.use(cors({
@@ -19,7 +20,7 @@ app.use(cors({
     } else {
       console.log('Blocked by CORS:', origin);
       callback(new Error('Not allowed by CORS'));
-    }
+    } 
   },
   methods: ['GET','POST','OPTIONS','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],

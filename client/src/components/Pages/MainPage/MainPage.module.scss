@@ -1,0 +1,91 @@
+.main{
+    padding-top: 75px;
+     background-color: rgb(55, 53, 57);
+     section{
+        width: 90%;
+        justify-self: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+     }
+     .div{
+      margin-top: 20px;
+      justify-self: center;
+        background-color:  rgb(84, 81, 86);
+        padding: 20px;
+        border-radius: 20px;
+         input{
+    margin: 5px;
+    background-color: rgb(55, 53, 57);
+    border: 1px solid rgb(137, 133, 140);
+    font-size: 20px;
+    border-radius: 10px;
+    color: rgb(137, 133, 140);
+    padding:10px 20px 10px 20px;
+    margin-left: 20px;
+   }
+   
+     }
+} .button{
+        margin-left: 50px;
+    justify-self: center;
+    background-color: rgb(109, 131, 102);
+    padding: 15px 100px 15px 100px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    transition: all ease-in-out 0.2s;
+   }
+   .button:hover{
+    cursor: pointer;
+    transform: translateY(-2.5px);
+      box-shadow: 0px 5px 15px -1px #000000;
+   }
+   .button:active{
+    background-color: rgb(93, 105, 89);
+    transform: translateY(0);
+    box-shadow: none;
+   }
+   .lastDiv{
+      margin: 20px;
+      justify-self: center;
+   }
+   .buttonFilter{
+        margin-left: 50px;
+    justify-self: center;
+    background-color: rgb(105, 102, 131);
+    padding: 15px 100px 15px 100px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    transition: all ease-in-out 0.2s;
+   }
+   .buttonFilter:hover{
+    cursor: pointer;
+    transform: translateY(-2.5px);
+      box-shadow: 0px 5px 15px -1px #000000;
+   }
+   .buttonFilter:active{
+    background-color: rgb(89, 97, 105);
+    transform: translateY(0);
+    box-shadow: none;
+   }
+   .section{
+      padding-top: 20px;
+      input{
+    margin: 5px;
+    background-color: rgb(55, 53, 57);
+    border: 1px solid rgb(137, 133, 140);
+    font-size: 20px;
+    border-radius: 10px;
+    color: rgb(137, 133, 140);
+    padding:10px 20px 10px 20px;
+    margin-left: 20px;
+   }
+   select{
+       background-color: rgb(55, 53, 57);
+    border: 1px solid rgb(137, 133, 140);
+    color: white;
+   }
+   }

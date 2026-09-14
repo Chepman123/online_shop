@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import type{ item,review } from "../AddItem/AddItem";
+import IsLogined from "../../IsLogined";
 
 export default function ItemPage(){
     const[data,setData] = useState<item>();
@@ -15,10 +16,10 @@ export default function ItemPage(){
       setData(result);
     }
     async function AddToCart(){
-      await fetch(`http://localhost:5000/item/${id}/cart`);
+      await fetch(`http://localhost:5000/item/${id}/cart`,{'credentials':'include'});
     }
     async function Like() {
-      await fetch(`http://localhost:5000/item/${id}/like`);
+      await fetch(`http://localhost:5000/item/${id}/like`,{credentials:'include'});
     }
     async function SendReview() {
       await fetch(`http://localhost:5000/item/${id}/review`,{
@@ -31,6 +32,7 @@ export default function ItemPage(){
         getData();
     },[])
    return <>
+   <IsLogined/>
    <h1>{data?.title}</h1>
    <p>{data?.description}</p>
    <h2>{data?.price}</h2>

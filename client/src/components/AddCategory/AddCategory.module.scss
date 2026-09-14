@@ -1,0 +1,36 @@
+.select{
+    margin-left: 20px;
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(55, 53, 57);
+    border: 1px solid rgb(137, 133, 140);
+    transition: all ease-in-out 0.2s;
+    color: white;
+}
+.div{
+      margin-left: 20px;
+      margin-top: 20px;
+}
+.select:hover{
+    cursor: pointer;
+    background-color: rgb(81, 78, 84);
+}
+.selected{
+    font-size: 20px;
+    display: flex;
+    color: white;
+    padding: 10px;
+    background-color: rgb(55, 53, 57);
+      border: 1px solid rgb(137, 133, 140);
+      border-radius: 10px;
+    h3{
+        display: none;
+    }
+}
+.selected:hover{
+    cursor: pointer;
+}
+.selected:hover h3{
+        display: block;
+}

@@ -1,0 +1,59 @@
+header{
+    position: fixed;
+    width: 100%;
+    background-color: rgb(55, 53, 57);
+    height: 75px;
+    border-bottom: 1px solid rgb(149, 149, 149);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: appearing forwards 0.5s ;
+    z-index: 2;
+    div:hover a{
+ opacity: 0.5;
+}
+    div{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: white;
+        margin-right: 20px;
+    img{
+        margin-left: 20px;
+        height: 100%;
+    }
+    a{
+      display: flex;
+      align-items: center;
+    }
+    p{
+        margin: 10px;
+    }
+  .count{
+    background-color: grey;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  a{
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all ease-in-out 0.2s;
+  }
+  
+  a:hover{
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+}
+@keyframes appearing{
+  from{
+  transform: translateY(-75px);
+  }
+  to{
+transform: translateY(0);
+  }
+}
