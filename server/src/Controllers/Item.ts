@@ -8,7 +8,7 @@ export default class{
        res.json(result);
     }
     async GetItem(req:Request,res:Response){
-        res.json(await this.service.GetData(req.params.id));
+        res.json(await this.service.GetData(req.params.id,req.cookies.token));
     }
     async AddCart(req:Request,res:Response){
         this.service.AddCart(req.params.id,req.cookies.token);

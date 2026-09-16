@@ -11,9 +11,10 @@ export interface item{
    price:number,
    review?:review[],
    photos:string[],
-   creator:string,
+   creator:string|{username:string}[],
    _id:string,
-   isInCart?:boolean
+   isInCart?:boolean,
+   isLiked?:boolean
 }
 export interface review{
      content:string,

@@ -14,6 +14,8 @@ export interface item{
    _id?:ObjectId,
    categories:{_id:ObjectId}[],
    isInCart?:boolean
+   isLiked?:boolean,
+   likes?:ObjectId[]
 }
 export interface review{
      content:string,
@@ -49,13 +51,35 @@ export default class{
      const result = await items.insertOne(item);
      return result.insertedId.toString();
     }
-    async GetData(id:string|ObjectId):Promise<item|null>{
+    async GetData(id:string|ObjectId,token:string):Promise<item|null>{
         const client = (await db).db('test');
         const items:Collection<item> = await client.collection('items');
         id = new ObjectId(id);
-        const item:item|null = await items.findOne({_id:new ObjectId(id)});
-        console.log(typeof(item?.review));
-        const users = await client.collection('users')
+       const result = await items.aggregate<item>([
+    {
+        $match: {
+            _id: new ObjectId(id)
+        }
+    },
+    {
+        $lookup: {
+            from: "users",
+            localField: "creator",
+            foreignField: "_id",
+            as: "creator"
+        }
+    }
+]).toArray();
+
+const item: item | null = result[0] ?? null;
+ const decoded:ObjectId = new ObjectId((await jwt.verify(token,process.env.SECRET!) as {_id:string})._id);
+        item.isLiked = item.likes?.some(id => id.equals(decoded));
+        const users:Collection<User> = await client.collection('users');
+const user = await users.findOne({ _id: decoded });
+ item.isInCart = user?.cart?.some(
+    id => id.equals(item._id!)
+) ?? false;
+
         if (item?.review && Array.isArray(item.review)) {
   for (const review of item.review) {
     const user = await users.findOne({ _id: new ObjectId(review.creator) });
@@ -77,9 +101,13 @@ export default class{
     async Like(id:string,token:string){
         const client = (await db).db('test');
          const decoded:ObjectId = new ObjectId((await jwt.verify(token,process.env.SECRET!) as {_id:string})._id);
-        const userId =(await client.collection('users').findOne({_id:decoded}))?._id;
         const items:Collection<item> = client.collection('items');
-        items.updateOne({_id:new ObjectId(id)},{$push:{likes:userId}})
+if ((await items.findOne({ _id: new ObjectId(id) }))?.likes?.some(
+    like => like.equals(decoded)
+)) {
+    items.updateOne({_id:new ObjectId(id)},{$pull:{likes:decoded}});
+}
+        else items.updateOne({_id:new ObjectId(id)},{$push:{likes:decoded}})
     }
     async Review(id:string,content:string,username:string,stars:number){
         const client = (await db).db('test');
