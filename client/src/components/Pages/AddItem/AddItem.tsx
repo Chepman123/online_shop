@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import IsLogined from "../../IsLogined";
 import classes from './AddItem.module.scss';
 import AddPhoto from "../../AddPhoto/AddPhoto";
@@ -30,6 +30,11 @@ export default function AddItem(){
     const[file3,setFile3] = useState<File|string>();
     const[file4,setFile4] = useState<File|string>();
     const[selected,SetSelected] = useState<string[]>([]);
+         const[isMobile,setMobile] = useState<boolean>(false);
+           useEffect(()=>{
+           const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+           setMobile(isMobile);
+       },[])
     async function AddItem(){
         let photos:string[]=[];
         photos[0] = await ConvertFileToURL(file1 as File);
@@ -65,16 +70,27 @@ export default function AddItem(){
     <input type="number"onChange={(e)=>setItem({...item!,price:Number(e.target.value)})} placeholder="price" value={item?.price}/><br/>
     <label>Category:</label><br/>
     <AddCategory setCategories={SetSelected}/>
-   <p>{status}</p>
-    <button className={classes.button} onClick={AddItem} type="button">Add product</button>
-   </div>
+    {isMobile&&
    <div className={classes.photos}>
     <AddPhoto setFile={setFile1}/>
     <AddPhoto setFile={setFile2}/>
     <AddPhoto setFile={setFile3}/>
     <AddPhoto setFile={setFile4}/>
-   
     </div>
+    }
+   <p>{status}</p>
+    <button className={classes.button} onClick={AddItem} type="button">Add product</button>
+   </div>
+   {!isMobile&&
+   <div className={classes.photos}>
+    <AddPhoto setFile={setFile1}/>
+    <AddPhoto setFile={setFile2}/>
+    <AddPhoto setFile={setFile3}/>
+    <AddPhoto setFile={setFile4}/>
+    </div>
+    }
+   
+    
    
     </form>
      

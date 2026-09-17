@@ -73,3 +73,14 @@ display: flex;
   
  
 }
+@media(max-width:765px){
+    .main{
+    form{
+        flex-direction: column;
+    }
+    .photos{
+        overflow-x: auto;
+        padding-top: 20px;
+    }
+}
+}

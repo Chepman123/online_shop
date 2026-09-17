@@ -57,3 +57,10 @@ header{
 transform: translateY(0);
   }
 }
+@media (max-width:765px){
+  header{
+    img{
+      display: none;
+    }
+  }
+}

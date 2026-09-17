@@ -20,7 +20,11 @@
         overflow-wrap: break-word;
     }
 }
-
+@media(max-width:765px){
+    .div{
+        width: 90%;
+    }
+}
 .name {
     display: flex;
     flex-direction: column;

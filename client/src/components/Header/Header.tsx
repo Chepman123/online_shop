@@ -7,6 +7,11 @@ export default function Header(){
     const[numberCart,setNumber] = useState<number>(0);
     const[profile,setProfile] = useState<string>('');
     const[money,setMoney] = useState<number>(0);
+     const[isMobile,setMobile] = useState<boolean>(false);
+       useEffect(()=>{
+       const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+       setMobile(isMobile);
+   },[])
     const GetData = async()=>{
        const response = await fetch('http://localhost:5000/header',{credentials:'include'});
        const result = await response.json();
@@ -21,12 +26,11 @@ export default function Header(){
     return <header>
         <div>
             <img src={img}/>
-            <Link to={'/'}><h2>Shopfinity</h2></Link>
+            <Link to={'/'}><h2>{isMobile?<i className="fa-solid fa-house"></i>:'Shopfinity'}</h2></Link>
         </div>
         <div className={classes.links}>
-            <Link to='/'>Home</Link>
-            <Link to={`/newProduct`}>Add product</Link>
-            <Link to={`/profile/${profile}`}>Profile</Link>
+            <Link to={`/newProduct`}>{isMobile?<i className="fa-solid fa-cart-plus"></i>:'Add product'}</Link>
+            <Link to={`/profile/${profile}`}>{isMobile?<i className="fa-solid fa-user"></i>:'Profile'}</Link>
         </div>
         <div>
             <Link to={'/addMoney'}>${money}</Link>
